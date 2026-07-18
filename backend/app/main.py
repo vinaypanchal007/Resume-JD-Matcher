@@ -67,10 +67,12 @@ def _normalize_resumes(items: list) -> list[dict]:
 
 
 @app.get("/health", response_model=HealthResponse)
-def health(matcher: ResumeMatcher = Depends(matcher_dependency)) -> HealthResponse:
+def health(
+    matcher: ResumeMatcher = Depends(matcher_dependency),
+) -> HealthResponse:
     return HealthResponse(
         status="ok",
-        embedding_model=matcher.embed_model_name,
+        embedding_model="Scikit-Learn TF-IDF",
         explanations_enabled=matcher.explanations_enabled,
     )
 
