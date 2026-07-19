@@ -5,8 +5,8 @@ const apiBase = ref(import.meta.env.VITE_API_BASE?.trim() || "/api");
 const jobDescriptions = ref([
   {
     id: crypto.randomUUID(),
-    title: "Data Analyst",
-    text: "We need a Data Analyst with Python, SQL, dashboarding, data cleaning, and stakeholder communication experience.",
+    title: "",
+    text: "",
   },
 ]);
 const resumeUploadGroups = ref([
@@ -156,17 +156,47 @@ onMounted(checkHealth);
         <aside class="space-y-5">
           <section class="rounded-[24px] border border-slate-800 bg-slate-900/85 p-4 shadow-[0_18px_45px_-24px_rgba(15,23,42,0.4)] backdrop-blur">
             <div class="flex items-center justify-between gap-3">
-              <h2 class="text-lg font-semibold text-slate-100">Job descriptions</h2>
-              <button class="rounded-full bg-slate-900 px-3 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700" type="button" @click="addJobDescription">Add JD</button>
+              <h2 class="text-lg font-semibold text-slate-100">
+                Job Descriptions
+              </h2>
+          
+              <button
+                class="rounded-full bg-slate-900 px-3 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                type="button"
+                @click="addJobDescription"
+              >
+                Add JD
+              </button>
             </div>
-
+          
             <div class="mt-4 space-y-4">
-              <article v-for="(jd, index) in jobDescriptions" :key="jd.id" class="rounded-2xl border border-slate-700 bg-slate-950/70 p-3">
+              <article
+                v-for="(jd, index) in jobDescriptions"
+                :key="jd.id"
+                class="rounded-2xl border border-slate-700 bg-slate-950/70 p-3"
+              >
                 <div class="flex items-center gap-2">
-                  <input v-model="jd.title" class="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-medium text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" :placeholder="`Job description ${index + 1}`" />
-                  <button class="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-800 disabled:opacity-40" type="button" :disabled="jobDescriptions.length === 1" @click="removeJobDescription(jd.id)">Remove</button>
+                  <input
+                    v-model="jd.title"
+                    class="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-medium text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                    :placeholder="`Job Title ${index + 1}`"
+                  />
+          
+                  <button
+                    class="rounded-xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-800 disabled:opacity-40"
+                    type="button"
+                    :disabled="jobDescriptions.length === 1"
+                    @click="removeJobDescription(jd.id)"
+                  >
+                    Remove
+                  </button>
                 </div>
-                <textarea v-model="jd.text" class="mt-3 min-h-44 w-full resize-y rounded-xl border border-slate-700 bg-slate-900 px-3 py-3 text-sm leading-6 text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" placeholder="Paste the full job description here"></textarea>
+          
+                <textarea
+                  v-model="jd.text"
+                  class="mt-3 min-h-44 w-full resize-y rounded-xl border border-slate-700 bg-slate-900 px-3 py-3 text-sm leading-6 text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                  placeholder="Type or paste the job description here..."
+                ></textarea>
               </article>
             </div>
           </section>
@@ -213,8 +243,28 @@ onMounted(checkHealth);
               </label>
             </div>
 
-            <button class="mt-4 w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 font-semibold text-white shadow-lg shadow-emerald-900/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/30 hover:from-emerald-500 hover:to-teal-500 disabled:bg-slate-800 disabled:from-slate-800 disabled:to-slate-800 disabled:text-slate-500 disabled:shadow-none disabled:hover:scale-100" type="button" :disabled="!canSubmit" @click="findMatches">
-              {{ loading ? 'Matching...' : 'Match JD and resumes' }}
+            <button
+              class="mt-4 w-full rounded-2xl
+                    bg-gradient-to-r from-emerald-600 to-teal-600
+                    px-4 py-3
+                    font-semibold text-white
+                    shadow-lg shadow-emerald-900/40
+                    transition-all duration-300
+                    hover:scale-[1.02]
+                    hover:from-emerald-500
+                    hover:to-teal-500
+                    hover:shadow-emerald-500/30
+                    disabled:from-emerald-800
+                    disabled:to-teal-800
+                    disabled:text-emerald-200
+                    disabled:opacity-70
+                    disabled:shadow-none
+                    disabled:hover:scale-100"
+              type="button"
+              :disabled="!canSubmit"
+              @click="findMatches"
+            >
+              {{ loading ? "Matching..." : "Match JD and resumes" }}
             </button>
 
             <p v-if="error" class="mt-4 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">{{ error }}</p>
