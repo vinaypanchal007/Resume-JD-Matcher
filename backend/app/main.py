@@ -17,14 +17,6 @@ allowed_origins = [
     "https://resume-jd-matcher-rho.vercel.app",
 ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 app = FastAPI(
     title="Resume JD Matcher API",
     version="2.0.0",
@@ -33,13 +25,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=list(dict.fromkeys(allowed_origins)),
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1):5173",
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 def matcher_dependency() -> ResumeMatcher:
     try:
