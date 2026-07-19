@@ -213,7 +213,7 @@ onMounted(checkHealth);
               </label>
             </div>
 
-            <button class="mt-4 w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 font-semibold text-white shadow-lg shadow-emerald-900/20 transition hover:from-emerald-500 hover:to-teal-500 disabled:cursor-not-allowed disabled:from-slate-300 disabled:to-slate-300" type="button" :disabled="!canSubmit" @click="findMatches">
+            <button class="mt-4 w-full rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 font-semibold text-white shadow-lg shadow-emerald-900/40 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/30 hover:from-emerald-500 hover:to-teal-500 disabled:bg-slate-800 disabled:from-slate-800 disabled:to-slate-800 disabled:text-slate-500 disabled:shadow-none disabled:hover:scale-100" type="button" :disabled="!canSubmit" @click="findMatches">
               {{ loading ? 'Matching...' : 'Match JD and resumes' }}
             </button>
 
