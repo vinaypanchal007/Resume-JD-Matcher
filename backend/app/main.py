@@ -9,12 +9,10 @@ from app.matcher import ResumeMatcher, extract_pdf_text, get_matcher
 from app.schemas import HealthResponse, MatchRequest, MatchResponse
 
 
-frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:5173")
+frontend_origin = "https://resume-jd-matcher-rho.vercel.app"
 
 allowed_origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://resume-jd-matcher-rho.vercel.app",
+    frontend_origin,
 ]
 
 app = FastAPI(
